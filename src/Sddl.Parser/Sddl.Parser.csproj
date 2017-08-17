@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.DirectoryServices" Version="4.5.0-preview2-25610-02" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.5.0-preview2-25610-02" />
+  </ItemGroup>
+</Project>
