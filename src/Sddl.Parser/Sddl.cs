@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Sddl.Parser
 {
@@ -67,10 +68,35 @@ namespace Sddl.Parser
             }
         }
 
-        public const char DeliminatorToken = ':';
-        public const char OwnerToken = 'O';
-        public const char GroupToken = 'G';
-        public const char DaclToken = 'D';
-        public const char SaclToken = 'S';
+        internal const char DeliminatorToken = ':';
+        internal const char OwnerToken = 'O';
+        internal const char GroupToken = 'G';
+        internal const char DaclToken = 'D';
+        internal const char SaclToken = 'S';
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (Owner != null)
+                sb.AppendLine($"{nameof(Owner)}: {Owner.ToString()}");
+            
+            if (Group != null)
+                sb.AppendLine($"{nameof(Group)}: {Group.ToString()}");
+
+            if (Dacl != null)
+            {
+                sb.AppendLine($"{nameof(Dacl)}: ");
+                sb.AppendLine(Format.Indent(Dacl.ToString()));
+            }
+
+            if (Sacl != null)
+            {
+                sb.AppendLine($"{nameof(Sacl)}: ");
+                sb.AppendLine(Format.Indent(Dacl.ToString()));
+            }
+
+            return sb.ToString();
+        }
     }
 }

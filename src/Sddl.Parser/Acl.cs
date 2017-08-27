@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Sddl.Parser
 {
@@ -19,11 +20,11 @@ namespace Sddl.Parser
 
             // Flags
             var flags = begin == -1 ? acl : acl.Substring(0, begin);
-            var flagsLabels = Match.ManyByPrefix(flags, SdControls, out var reminder);
+            var flagsLabels = Match.ManyByPrefix(flags, SdControlsDict, out var reminder);
 
             if (reminder != null)
                 // ERROR Flags part can not be fully parsed.
-                flagsLabels.AddLast(string.Format(Constants.UnknownFormat, reminder));
+                flagsLabels.AddLast(Format.Unknown(reminder));
 
             Flags = flagsLabels.ToArray();
 
@@ -65,12 +66,34 @@ namespace Sddl.Parser
             }
         }
 
-        public static Dictionary<string, string> SdControls = new Dictionary<string, string>
+        internal static Dictionary<string, string> SdControlsDict = new Dictionary<string, string>
         {
             { "P", "PROTECTED" },
             { "AR", "AUTO_INHERIT_REQ" },
             { "AI", "AUTO_INHERITED" },
             { "NO_ACCESS_CONTROL", "NULL_ACL" },
         };
+
+        public override string ToString()
+        {
+            bool anyFlags = Flags != null && Flags.Any();
+            bool anyAces = Aces != null && Aces.Any();
+            
+            StringBuilder sb = new StringBuilder();
+
+            if (anyFlags)
+                sb.AppendLine($"{nameof(Flags)}: {string.Join(", ", Flags)}");
+
+            if (anyAces)
+            {
+                for (int i = 0; i < Aces.Length; ++i)
+                {
+                    sb.AppendLine($"Ace[{i:00}]");
+                    sb.AppendLine(Format.Indent(Aces[i].ToString()));
+                }
+            }
+
+            return sb.ToString();
+        }
     }
 }

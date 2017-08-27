@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Sddl.Parser
 {
@@ -8,11 +9,11 @@ namespace Sddl.Parser
         public string Raw { get; }
 
         public string AceType { get; }
-        public string[] Flags { get; }
-        public string[] Rights { get; }
+        public string[] AceFlags { get; }
+        public string[] AccessMask { get; }
         public string ObjectGuid { get; }
         public string InheritObjectGuid { get; }
-        public Sid Account { get; }
+        public Sid AceSid { get; }
 
         public Ace(string ace, SecurableObjectType type = SecurableObjectType.Unknown)
         {
@@ -26,10 +27,10 @@ namespace Sddl.Parser
             // ace_type
             if (parts.Length > 0 && parts[0].Length > 0)
             {
-                string aceType = Match.OneByPrefix(parts[0], AceTypes, out var reminder);
+                string aceType = Match.OneByPrefix(parts[0], AceTypesDict, out var reminder);
                 
-                if (aceType == null || reminder.Length > 0)
-                    aceType = string.Format(Constants.UnknownFormat, parts[0]);
+                if (aceType == null || !string.IsNullOrEmpty(reminder))
+                    aceType = Format.Unknown(parts[0]);
 
                 AceType = aceType;
             }
@@ -37,12 +38,12 @@ namespace Sddl.Parser
             // ace_flags
             if (parts.Length > 1 && parts[1].Length > 0)
             {
-                var flags = Match.ManyByPrefix(parts[1], AceFlags, out var reminder);
+                var flags = Match.ManyByPrefix(parts[1], AceFlagsDict, out var reminder);
                 
-                if (reminder.Length > 0)
-                    flags.AddLast(string.Format(Constants.UnknownFormat, reminder));
+                if (!string.IsNullOrEmpty(reminder))
+                    flags.AddLast(Format.Unknown(reminder));
 
-                Flags = flags.ToArray();
+                AceFlags = flags.ToArray();
             }
 
             // rights
@@ -52,24 +53,24 @@ namespace Sddl.Parser
                 {
                     IEnumerable<string> rights = Enumerable.Empty<string>();
 
-                    if (AceUintSpecificRights.TryGetValue(type, out var aceUintSpecificRightsForType))
+                    if (AceUintSpecificRightsDict.TryGetValue(type, out var aceUintSpecificRightsForType))
                         rights = rights.Concat(Match.ManyByUint(accessMask, aceUintSpecificRightsForType, out accessMask));
 
-                    rights = rights.Concat(Match.ManyByUint(accessMask, AceUintRights, out accessMask));
+                    rights = rights.Concat(Match.ManyByUint(accessMask, AceUintRightsDict, out accessMask));
 
                     if (accessMask > 0)
-                        rights.Concat(new[] { string.Format(Constants.UnknownFormat, $"{accessMask:X}") });
+                        rights.Concat(new[] { Format.Unknown($"{accessMask:X}") });
 
-                    Rights = rights.ToArray();
+                    AccessMask = rights.ToArray();
                 }
                 else
                 {
-                    var rights = Match.ManyByPrefix(parts[2], AceAliasRights, out var reminder);
+                    var rights = Match.ManyByPrefix(parts[2], AceAliasRightsDict, out var reminder);
                     
-                    if (reminder.Length > 0)
-                        rights.AddLast(string.Format(Constants.UnknownFormat, reminder));
+                    if (!string.IsNullOrEmpty(reminder))
+                        rights.AddLast(Format.Unknown(reminder));
 
-                    Rights = rights.ToArray();
+                    AccessMask = rights.ToArray();
                 }
             }
 
@@ -88,7 +89,7 @@ namespace Sddl.Parser
             // account_sid
             if (parts.Length > 5 && parts[5].Length > 0)
             {
-                Account = new Sid(parts[5]);
+                AceSid = new Sid(parts[5]);
             }
 
             // resource_attribute
@@ -98,14 +99,14 @@ namespace Sddl.Parser
             }
         }
 
-        public const char BeginToken = '(';
-        public const char EndToken = ')';
-        public const char SeparatorToken = ';';
+        internal const char BeginToken = '(';
+        internal const char EndToken = ')';
+        internal const char SeparatorToken = ';';
 
         /// <summary>
         /// A dictionary of ace type strings as defined in https://msdn.microsoft.com/en-us/library/windows/desktop/aa374928(v=vs.85).aspx#ace_types
         /// </summary>
-        public static Dictionary<string, string> AceTypes = new Dictionary<string, string>
+        internal static Dictionary<string, string> AceTypesDict = new Dictionary<string, string>
         {
             { "A", "ACCESS_ALLOWED" },
             { "D", "ACCESS_DENIED" },
@@ -128,7 +129,7 @@ namespace Sddl.Parser
         /// <summary>
         /// A dictionary of ace flag strings as defined in https://msdn.microsoft.com/en-us/library/windows/desktop/aa374928(v=vs.85).aspx#ace_flags
         /// </summary>
-        public static Dictionary<string, string> AceFlags = new Dictionary<string, string>
+        internal static Dictionary<string, string> AceFlagsDict = new Dictionary<string, string>
         {
             { "CI", "CONTAINER_INHERIT" },
             { "OI", "OBJECT_INHERIT" },
@@ -142,7 +143,7 @@ namespace Sddl.Parser
         /// <summary>
         /// A dictionary of access right alias strings as defined in https://msdn.microsoft.com/en-us/library/windows/desktop/aa374928(v=vs.85).aspx#rights
         /// </summary>
-        public static Dictionary<string, string> AceAliasRights = new Dictionary<string, string>
+        internal static Dictionary<string, string> AceAliasRightsDict = new Dictionary<string, string>
         {
             // Generic access rights
             { "GA", "GENERIC_ALL" },
@@ -189,7 +190,7 @@ namespace Sddl.Parser
         /// A dictionary of access right alias strings as defined in winnt.h.
         /// The numeric layout of AccessMask is explained here https://msdn.microsoft.com/pl-pl/library/windows/desktop/aa374896(v=vs.85).aspx.
         /// </summary>
-        public static Dictionary<uint, string> AceUintRights = new Dictionary<uint, string>
+        internal static Dictionary<uint, string> AceUintRightsDict = new Dictionary<uint, string>
         {
             // Generic access rights
             { 0x80000000, "GENERIC_READ" },
@@ -210,7 +211,7 @@ namespace Sddl.Parser
             { 0x00010000, "DELETE"},
         };
 
-        public static Dictionary<SecurableObjectType, Dictionary<uint, string>> AceUintSpecificRights = new Dictionary<SecurableObjectType, Dictionary<uint, string>>
+        internal static Dictionary<SecurableObjectType, Dictionary<uint, string>> AceUintSpecificRightsDict = new Dictionary<SecurableObjectType, Dictionary<uint, string>>
         {
             {
                 SecurableObjectType.File,
@@ -356,5 +357,24 @@ namespace Sddl.Parser
                 }
             }
         };
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"{nameof(AceType)}: {AceType.ToString()}");
+
+            if (AceFlags != null && AceFlags.Any())
+                sb.AppendLine($"{nameof(AceFlags)}: {string.Join(", ", AceFlags)}");
+
+            if (AccessMask != null && AccessMask.Any())
+            {
+                sb.AppendLine($"{nameof(AccessMask)}:");
+                for (int i = 0; i < AccessMask.Length; ++i)
+                    sb.AppendLine(Format.Indent(AccessMask[i]));
+            }
+
+            return sb.ToString();
+        }
     }
 }

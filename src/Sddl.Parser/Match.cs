@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Sddl.Parser
 {
@@ -8,8 +9,8 @@ namespace Sddl.Parser
         {
             var labels = new LinkedList<string>();
 
-            reminder = input;
-            while (reminder.Length > 0)
+            reminder = SubstituteEmptyWithNull(input);
+            while (reminder != null)
             {
                 string label = Match.OneByPrefix(reminder, tokensToLabels, out reminder);
 
@@ -67,6 +68,19 @@ namespace Sddl.Parser
             }
 
             reminder = mask;
+            return null;
+        }
+
+        public static string OneByRegex(string input, IDictionary<string, string> tokensToLabels)
+        {
+            foreach (var kv in tokensToLabels)
+            {
+                if (Regex.IsMatch(input, kv.Key))
+                {
+                    return kv.Value;
+                }
+            }
+
             return null;
         }
 
