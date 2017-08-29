@@ -14,7 +14,7 @@ namespace Sddl.Parser
         public string[] Rights { get; }
         public string ObjectGuid { get; }
         public string InheritObjectGuid { get; }
-        public Sid Account { get; }
+        public Sid AceSid { get; }
 
         public Ace(string ace, SecurableObjectType type = SecurableObjectType.Unknown)
         {
@@ -90,7 +90,7 @@ namespace Sddl.Parser
             // account_sid
             if (parts.Length > 5 && parts[5].Length > 0)
             {
-                Account = new Sid(parts[5]);
+                AceSid = new Sid(parts[5]);
             }
 
             // resource_attribute
@@ -228,6 +228,10 @@ namespace Sddl.Parser
             { 0x00010000, "DELETE"},
         };
 
+        /// <summary>
+        /// A dictionary of object-specific access right alias strings as defined in winnt.h.
+        /// Sample winnt.h definition can be found here: https://source.winehq.org/source/include/winnt.h.
+        /// </summary>
         internal static Dictionary<SecurableObjectType, Dictionary<uint, string>> AceUintSpecificRightsDict = new Dictionary<SecurableObjectType, Dictionary<uint, string>>
         {
             {
@@ -379,8 +383,8 @@ namespace Sddl.Parser
         {
             StringBuilder sb = new StringBuilder();
 
-            if (Account != null)
-                sb.AppendLineEnv($"{nameof(Account)}: {Account.ToString()}");
+            if (AceSid != null)
+                sb.AppendLineEnv($"{nameof(AceSid)}: {AceSid.ToString()}");
 
             if (AceType != null)
                 sb.AppendLineEnv($"{nameof(AceType)}: {AceType.ToString()}");
