@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,10 @@ namespace Sddl.Parser
 
         public string AceType { get; }
         public string[] AceFlags { get; }
-        public string[] AccessMask { get; }
+        public string[] Rights { get; }
         public string ObjectGuid { get; }
         public string InheritObjectGuid { get; }
-        public Sid AceSid { get; }
+        public Sid Account { get; }
 
         public Ace(string ace, SecurableObjectType type = SecurableObjectType.Unknown)
         {
@@ -49,7 +50,7 @@ namespace Sddl.Parser
             // rights
             if (parts.Length > 2 && parts[2].Length > 0)
             {
-                if (uint.TryParse(parts[2], out uint accessMask))
+                if (TryParseHex(parts[2], out uint accessMask))
                 {
                     IEnumerable<string> rights = Enumerable.Empty<string>();
 
@@ -59,9 +60,9 @@ namespace Sddl.Parser
                     rights = rights.Concat(Match.ManyByUint(accessMask, AceUintRightsDict, out accessMask));
 
                     if (accessMask > 0)
-                        rights.Concat(new[] { Format.Unknown($"{accessMask:X}") });
+                        rights = rights.Concat(new[] { Format.Unknown($"0x{accessMask:X}") });
 
-                    AccessMask = rights.ToArray();
+                    Rights = rights.ToArray();
                 }
                 else
                 {
@@ -70,7 +71,7 @@ namespace Sddl.Parser
                     if (!string.IsNullOrEmpty(reminder))
                         rights.AddLast(Format.Unknown(reminder));
 
-                    AccessMask = rights.ToArray();
+                    Rights = rights.ToArray();
                 }
             }
 
@@ -89,14 +90,30 @@ namespace Sddl.Parser
             // account_sid
             if (parts.Length > 5 && parts[5].Length > 0)
             {
-                AceSid = new Sid(parts[5]);
+                Account = new Sid(parts[5]);
             }
 
             // resource_attribute
             if (parts.Length > 6)
             {
-
+                // unsupported
             }
+        }
+
+        private bool TryParseHex(string hex, out uint result)
+        {
+            if (hex.StartsWith("0x", StringComparison.CurrentCultureIgnoreCase) ||
+                hex.StartsWith("&H", StringComparison.CurrentCultureIgnoreCase)) 
+            {
+                hex = hex.Substring(2);
+            }
+            else
+            {
+                result = default(uint);
+                return false;
+            }
+
+            return uint.TryParse(hex, System.Globalization.NumberStyles.HexNumber, null, out result);
         }
 
         internal const char BeginToken = '(';
@@ -362,17 +379,27 @@ namespace Sddl.Parser
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine($"{nameof(AceType)}: {AceType.ToString()}");
+            if (Account != null)
+                sb.AppendLineEnv($"{nameof(Account)}: {Account.ToString()}");
+
+            if (AceType != null)
+                sb.AppendLineEnv($"{nameof(AceType)}: {AceType.ToString()}");
 
             if (AceFlags != null && AceFlags.Any())
-                sb.AppendLine($"{nameof(AceFlags)}: {string.Join(", ", AceFlags)}");
+                sb.AppendLineEnv($"{nameof(AceFlags)}: {string.Join(", ", AceFlags)}");
 
-            if (AccessMask != null && AccessMask.Any())
+            if (Rights != null && Rights.Any())
             {
-                sb.AppendLine($"{nameof(AccessMask)}:");
-                for (int i = 0; i < AccessMask.Length; ++i)
-                    sb.AppendLine(Format.Indent(AccessMask[i]));
+                sb.AppendLineEnv($"{nameof(Rights)}:");
+                for (int i = 0; i < Rights.Length; ++i)
+                    sb.AppendIndentEnv(Rights[i]);
             }
+
+            if (ObjectGuid != null)
+                sb.AppendLineEnv($"{nameof(ObjectGuid)}: {ObjectGuid.ToString()}");
+
+            if (InheritObjectGuid != null)
+                sb.AppendLineEnv($"{nameof(InheritObjectGuid)}: {InheritObjectGuid.ToString()}");
 
             return sb.ToString();
         }

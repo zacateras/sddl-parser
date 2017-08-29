@@ -79,21 +79,21 @@ namespace Sddl.Parser
             StringBuilder sb = new StringBuilder();
 
             if (Owner != null)
-                sb.AppendLine($"{nameof(Owner)}: {Owner.ToString()}");
+                sb.AppendLineEnv($"{nameof(Owner)}: {Owner.ToString()}");
             
             if (Group != null)
-                sb.AppendLine($"{nameof(Group)}: {Group.ToString()}");
+                sb.AppendLineEnv($"{nameof(Group)}: {Group.ToString()}");
 
             if (Dacl != null)
             {
-                sb.AppendLine($"{nameof(Dacl)}: ");
-                sb.AppendLine(Format.Indent(Dacl.ToString()));
+                sb.AppendLineEnv($"{nameof(Dacl)}:");
+                sb.AppendIndentEnv(Dacl.ToString());
             }
 
             if (Sacl != null)
             {
-                sb.AppendLine($"{nameof(Sacl)}: ");
-                sb.AppendLine(Format.Indent(Dacl.ToString()));
+                sb.AppendLineEnv($"{nameof(Sacl)}:");
+                sb.AppendIndentEnv(Dacl.ToString());
             }
 
             return sb.ToString();

@@ -39,13 +39,16 @@ namespace Sddl.Parser
                 {
                     if (acl[end] == Ace.BeginToken)
                     {
+                        if (balance == 0)
+                            begin = end;
+                            
                         balance += 1;
                     }
                     else if (acl[end] == Ace.EndToken)
                     {
                         balance -= 1;
 
-                        int length = end - begin - 2;
+                        int length = end - begin - 1;
                         if (length < 0)
                         {
                             // ERROR Ace is empty.
@@ -82,14 +85,14 @@ namespace Sddl.Parser
             StringBuilder sb = new StringBuilder();
 
             if (anyFlags)
-                sb.AppendLine($"{nameof(Flags)}: {string.Join(", ", Flags)}");
+                sb.AppendLineEnv($"{nameof(Flags)}: {string.Join(", ", Flags)}");
 
             if (anyAces)
             {
                 for (int i = 0; i < Aces.Length; ++i)
                 {
-                    sb.AppendLine($"Ace[{i:00}]");
-                    sb.AppendLine(Format.Indent(Aces[i].ToString()));
+                    sb.AppendLineEnv($"Ace[{i:00}]");
+                    sb.AppendIndentEnv(Aces[i].ToString());
                 }
             }
 

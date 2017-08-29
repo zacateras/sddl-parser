@@ -108,7 +108,6 @@ namespace Sddl.Parser
             { "S-1-3-2", @"Creator Owner Server" },
             { "S-1-3-3", @"Creator Group Server" },
             { "S-1-3-4", @"Owner Rights" },
-            { "S-1-5-80-0", @"All Services" },
             { "S-1-4", @"Non-unique Authority" },
             { "S-1-5", @"NT Authority" },
             { "S-1-5-1", @"Dialup" },
