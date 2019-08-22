@@ -407,5 +407,39 @@ namespace Sddl.Parser
 
             return sb.ToString();
         }
+
+        public static bool operator== (Ace ace0, Ace ace1)
+        {
+            bool isTypeEqual, areFlagsEqual, areRightsEqual, isObjectGuidEqual, isInheritObjectGuid;
+
+            isTypeEqual = ace0.AceType == ace1.AceType;
+            isObjectGuidEqual = ace0.ObjectGuid == ace1.ObjectGuid;
+            isInheritObjectGuid = ace0.InheritObjectGuid == ace1.InheritObjectGuid;
+
+            if (ace0.AceFlags != null && ace1.AceFlags != null)
+            {
+                areFlagsEqual = !ace0.AceFlags.Except(ace1.AceFlags).Any() && !ace1.AceFlags.Except(ace0.AceFlags).Any();
+            }
+            else
+            {
+                areFlagsEqual = ace0.AceFlags == null && ace1.AceFlags == null;
+            }
+
+            if (ace0.Rights != null && ace1.Rights != null)
+            {
+                areRightsEqual = !ace0.Rights.Except(ace1.Rights).Any() && !ace1.Rights.Except(ace0.Rights).Any();
+            }
+            else
+            {
+                areRightsEqual = ace0.Rights == null && ace1.Rights == null;
+            }
+
+            return isTypeEqual && areFlagsEqual && areRightsEqual && isObjectGuidEqual && isInheritObjectGuid;
+        }
+
+        public static bool operator!= (Ace ace0, Ace ace1)
+        {
+            return !(ace0 == ace1);
+        }
     }
 }
