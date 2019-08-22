@@ -20,6 +20,8 @@ namespace Sddl.Parser
         {
             var parts = ace.Split(SeparatorToken);
 
+            Raw = ace;
+
             if (parts.Length < 6)
             {
                 // ERROR Ace have incorrect format - less parts than 6.
