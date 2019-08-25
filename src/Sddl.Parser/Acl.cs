@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Sddl.Parser
 {
-    public class Acl
+    public class Acl : Acm
     {
         public string Raw { get; }
         
@@ -23,8 +22,7 @@ namespace Sddl.Parser
             var flagsLabels = Match.ManyByPrefix(flags, SdControlsDict, out var reminder);
 
             if (reminder != null)
-                // ERROR Flags part can not be fully parsed.
-                flagsLabels.AddLast(Format.Unknown(reminder));
+                Report(Error.SDP004.Format(reminder));
 
             Flags = flagsLabels.ToArray();
 
@@ -37,6 +35,8 @@ namespace Sddl.Parser
                 int balance = 0;
                 for (int end = begin; end < acl.Length; end++)
                 {
+                    int length = end - begin - 1;
+
                     if (acl[end] == Ace.BeginToken)
                     {
                         if (balance == 0)
@@ -48,10 +48,9 @@ namespace Sddl.Parser
                     {
                         balance -= 1;
 
-                        int length = end - begin - 1;
                         if (length < 0)
                         {
-                            // ERROR Ace is empty.
+                            Report(Error.SDP005.Format(begin.ToString()));
                             continue;
                         }
 
@@ -60,7 +59,8 @@ namespace Sddl.Parser
                     }
                     else if (balance <= 0)
                     {
-                        // ERROR Acl contains unexpected AceEnd characters.
+                        Report(Error.SDP006.Format(acl.Substring(begin + 1, length)));
+
                         balance = 0;
                     }
                 }

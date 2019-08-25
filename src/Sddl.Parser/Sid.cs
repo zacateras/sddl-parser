@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Sddl.Parser
 {
-    public class Sid
+    public class Sid : Acm
     {
         public string Raw { get; }
 
@@ -18,7 +18,8 @@ namespace Sddl.Parser
 
             if (alias == null)
             {
-                // ERROR Unknown SID.
+                Report(Error.SDP001.Format(sid));
+                
                 alias = Format.Unknown(sid);
             }
             

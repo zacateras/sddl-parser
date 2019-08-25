@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Sddl.Parser
 {
-    public class Ace
+    public class Ace : Acm
     {
         public string Raw { get; }
 
@@ -18,14 +18,12 @@ namespace Sddl.Parser
 
         public Ace(string ace, SecurableObjectType type = SecurableObjectType.Unknown)
         {
-            var parts = ace.Split(SeparatorToken);
-
             Raw = ace;
 
+            var parts = Raw.Split(SeparatorToken);
+
             if (parts.Length < 6)
-            {
-                // ERROR Ace have incorrect format - less parts than 6.
-            }
+                Report(Error.SDP003.Format(parts.Length.ToString()));
 
             // ace_type
             if (parts.Length > 0 && parts[0].Length > 0)

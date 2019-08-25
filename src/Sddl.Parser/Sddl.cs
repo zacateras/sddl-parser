@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sddl.Parser
 {
-    public class Sddl
+    public class Sddl : Acm
     {
         public string Raw { get; }
 
@@ -64,7 +64,7 @@ namespace Sddl.Parser
 
             if (components.Any())
             {
-                // ERROR Unknown components encountered.
+                Report(Error.SDP007.Format());
             }
         }
 

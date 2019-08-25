@@ -51,7 +51,7 @@ namespace Sddl.Parser.Tests
 Group: DOMAIN_ADMINISTRATORS
 Dacl:
   Ace[00]
-    Account: Null Authority
+    AceSid: Nobody
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -73,12 +73,12 @@ Dacl:
 
 @"Dacl:
   Ace[00]
-    Account: LOCAL_SYSTEM
+    AceSid: LOCAL_SYSTEM
     AceType: ACCESS_ALLOWED
     Rights:
       FILE_ALL
   Ace[01]
-    Account: BUILTIN_ADMINISTRATORS
+    AceSid: BUILTIN_ADMINISTRATORS
     AceType: ACCESS_ALLOWED
     Rights:
       FILE_ALL
@@ -92,31 +92,31 @@ Dacl:
 @"Dacl:
   Flags: PROTECTED, AUTO_INHERITED
   Ace[00]
-    Account: BUILTIN_GUESTS
+    AceSid: BUILTIN_GUESTS
     AceType: ACCESS_DENIED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[01]
-    Account: BUILTIN_ADMINISTRATORS
+    AceSid: BUILTIN_ADMINISTRATORS
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[02]
-    Account: CREATOR_OWNER
+    AceSid: CREATOR_OWNER
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT, INHERIT_ONLY
     Rights:
       FILE_ALL
   Ace[03]
-    Account: LOCAL_SYSTEM
+    AceSid: LOCAL_SYSTEM
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[04]
-    Account: BUILTIN_USERS
+    AceSid: BUILTIN_USERS
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
@@ -133,31 +133,31 @@ Group: LOCAL_SYSTEM
 Dacl:
   Flags: PROTECTED, AUTO_INHERITED
   Ace[00]
-    Account: BUILTIN_GUESTS
+    AceSid: BUILTIN_GUESTS
     AceType: ACCESS_DENIED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[01]
-    Account: BUILTIN_ADMINISTRATORS
+    AceSid: BUILTIN_ADMINISTRATORS
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[02]
-    Account: CREATOR_OWNER
+    AceSid: CREATOR_OWNER
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT, INHERIT_ONLY
     Rights:
       FILE_ALL
   Ace[03]
-    Account: LOCAL_SYSTEM
+    AceSid: LOCAL_SYSTEM
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[04]
-    Account: BUILTIN_USERS
+    AceSid: BUILTIN_USERS
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
@@ -165,31 +165,31 @@ Dacl:
 Sacl:
   Flags: PROTECTED, AUTO_INHERITED
   Ace[00]
-    Account: BUILTIN_GUESTS
+    AceSid: BUILTIN_GUESTS
     AceType: ACCESS_DENIED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[01]
-    Account: BUILTIN_ADMINISTRATORS
+    AceSid: BUILTIN_ADMINISTRATORS
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[02]
-    Account: CREATOR_OWNER
+    AceSid: CREATOR_OWNER
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT, INHERIT_ONLY
     Rights:
       FILE_ALL
   Ace[03]
-    Account: LOCAL_SYSTEM
+    AceSid: LOCAL_SYSTEM
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[04]
-    Account: BUILTIN_USERS
+    AceSid: BUILTIN_USERS
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
@@ -205,7 +205,7 @@ Sacl:
 Group: DOMAIN_ADMINISTRATORS
 Dacl:
   Ace[00]
-    Account: LOCAL_SYSTEM
+    AceSid: LOCAL_SYSTEM
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -219,7 +219,7 @@ Dacl:
       STANDARD_DELETE
       SELF_WRITE
   Ace[01]
-    Account: DOMAIN_ADMINISTRATORS
+    AceSid: DOMAIN_ADMINISTRATORS
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -233,35 +233,35 @@ Dacl:
       STANDARD_DELETE
       SELF_WRITE
   Ace[02]
-    Account: ACCOUNT_OPERATORS
+    AceSid: ACCOUNT_OPERATORS
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967aba-0de6-11d0-a285-00aa003049e2
   Ace[03]
-    Account: ACCOUNT_OPERATORS
+    AceSid: ACCOUNT_OPERATORS
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967a9c-0de6-11d0-a285-00aa003049e2
   Ace[04]
-    Account: ACCOUNT_OPERATORS
+    AceSid: ACCOUNT_OPERATORS
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: 6da8a4ff-0e52-11d0-a286-00aa003049e2
   Ace[05]
-    Account: PRINTER_OPERATORS
+    AceSid: PRINTER_OPERATORS
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967aa8-0de6-11d0-a285-00aa003049e2
   Ace[06]
-    Account: AUTHENTICATED_USERS
+    AceSid: AUTHENTICATED_USERS
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -269,7 +269,7 @@ Dacl:
       READ_CONTROL
 Sacl:
   Ace[00]
-    Account: LOCAL_SYSTEM
+    AceSid: LOCAL_SYSTEM
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -283,7 +283,7 @@ Sacl:
       STANDARD_DELETE
       SELF_WRITE
   Ace[01]
-    Account: DOMAIN_ADMINISTRATORS
+    AceSid: DOMAIN_ADMINISTRATORS
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -297,35 +297,35 @@ Sacl:
       STANDARD_DELETE
       SELF_WRITE
   Ace[02]
-    Account: ACCOUNT_OPERATORS
+    AceSid: ACCOUNT_OPERATORS
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967aba-0de6-11d0-a285-00aa003049e2
   Ace[03]
-    Account: ACCOUNT_OPERATORS
+    AceSid: ACCOUNT_OPERATORS
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967a9c-0de6-11d0-a285-00aa003049e2
   Ace[04]
-    Account: ACCOUNT_OPERATORS
+    AceSid: ACCOUNT_OPERATORS
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: 6da8a4ff-0e52-11d0-a286-00aa003049e2
   Ace[05]
-    Account: PRINTER_OPERATORS
+    AceSid: PRINTER_OPERATORS
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967aa8-0de6-11d0-a285-00aa003049e2
   Ace[06]
-    Account: AUTHENTICATED_USERS
+    AceSid: AUTHENTICATED_USERS
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
