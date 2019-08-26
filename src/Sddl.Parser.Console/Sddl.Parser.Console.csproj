@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <Project Include="../../common.props" />
-  </ItemGroup>
+  <Import Project="../../common.props" />
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Sddl.Parser.Console</AssemblyName>
+    <PackageId>Sddl.Parser.Console</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
