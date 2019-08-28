@@ -408,38 +408,31 @@ namespace Sddl.Parser
             return sb.ToString();
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Ace ace &&
+                   Raw == ace.Raw &&
+                   AceType == ace.AceType &&
+                   EqualityComparer<string[]>.Default.Equals(AceFlags, ace.AceFlags) &&
+                   EqualityComparer<string[]>.Default.Equals(Rights, ace.Rights) &&
+                   ObjectGuid == ace.ObjectGuid &&
+                   InheritObjectGuid == ace.InheritObjectGuid &&
+                   AceSid == ace.AceSid;
+        }
+
         public static bool operator== (Ace ace0, Ace ace1)
         {
-            bool isTypeEqual, areFlagsEqual, areRightsEqual, isObjectGuidEqual, isInheritObjectGuid;
-
-            isTypeEqual = ace0.AceType == ace1.AceType;
-            isObjectGuidEqual = ace0.ObjectGuid == ace1.ObjectGuid;
-            isInheritObjectGuid = ace0.InheritObjectGuid == ace1.InheritObjectGuid;
-
-            if (ace0.AceFlags != null && ace1.AceFlags != null)
-            {
-                areFlagsEqual = !ace0.AceFlags.Except(ace1.AceFlags).Any() && !ace1.AceFlags.Except(ace0.AceFlags).Any();
-            }
+            if (ace0 is null && ace1 is null)
+                return true;
+            else if (ace0 is null || ace1 is null)
+                return false;
             else
-            {
-                areFlagsEqual = ace0.AceFlags == null && ace1.AceFlags == null;
-            }
-
-            if (ace0.Rights != null && ace1.Rights != null)
-            {
-                areRightsEqual = !ace0.Rights.Except(ace1.Rights).Any() && !ace1.Rights.Except(ace0.Rights).Any();
-            }
-            else
-            {
-                areRightsEqual = ace0.Rights == null && ace1.Rights == null;
-            }
-
-            return isTypeEqual && areFlagsEqual && areRightsEqual && isObjectGuidEqual && isInheritObjectGuid;
+                return ace0.Equals(ace1);
         }
 
         public static bool operator!= (Ace ace0, Ace ace1)
         {
-            return !(ace0 == ace1);
+            return !!(ace0 == ace1);
         }
     }
 }

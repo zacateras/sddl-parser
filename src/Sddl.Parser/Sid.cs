@@ -204,5 +204,27 @@ namespace Sddl.Parser
         {
             return Alias.ToString();
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Sid sid &&
+                   Raw == sid.Raw &&
+                   Alias == sid.Alias;
+        }
+
+        public static bool operator== (Sid sid0, Sid sid1)
+        {
+            if (sid0 is null && sid1 is null)
+                return true;
+            else if (sid0 is null || sid1 is null)
+                return false;
+            else
+                return sid0.Equals(sid1);
+        }
+
+        public static bool operator!= (Sid sid0, Sid sid1)
+        {
+            return !(sid0 == sid1);
+        }
     }
 }

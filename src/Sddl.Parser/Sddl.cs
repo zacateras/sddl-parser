@@ -98,5 +98,30 @@ namespace Sddl.Parser
 
             return sb.ToString();
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Sddl sddl &&
+                   Raw == sddl.Raw &&
+                   Owner == sddl.Owner &&
+                   Group == sddl.Group &&
+                   Dacl == sddl.Dacl &&
+                   Sacl == sddl.Sacl;
+        }
+
+        public static bool operator== (Sddl sddl0, Sddl sddl1)
+        {
+            if (sddl0 is null && sddl1 is null)
+                return true;
+            else if (sddl0 is null || sddl1 is null)
+                return false;
+            else
+                return sddl0.Equals(sddl1);
+        }
+
+        public static bool operator!= (Sddl sddl0, Sddl sddl1)
+        {
+            return !(sddl0 == sddl1);
+        }
     }
 }
