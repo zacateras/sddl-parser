@@ -12,11 +12,11 @@ Usage: ./Sddl.Parser.Console.exe "O:BAG:BAD:(A;CI;CCDCRP;;;NS)" [Unknown | File 
 ```
 $ ./Sddl.Parser.Console.exe "O:BAG:BAD:(A;CI;CCDCRP;;;NS)"
 
-Owner: BUILTIN_ADMINISTRATORS
-Group: BUILTIN_ADMINISTRATORS
+Owner: Administrators
+Group: Administrators
 Dacl:
   Ace[00]
-    AceSid: NETWORK_SERVICE
+    AceSid: Network Service
     AceType: ACCESS_ALLOWED
     AceFlags: CONTAINER_INHERIT
     Rights:
@@ -30,31 +30,31 @@ $ ./Sddl.Parser.Console.exe "D:PAI(D;OICI;FA;;;BG)(A;OICI;FA;;;BA)(A;OICIIO;FA;;
 Dacl:
   Flags: PROTECTED, AUTO_INHERITED
   Ace[00]
-    AceSid: BUILTIN_GUESTS
+    AceSid: Guests
     AceType: ACCESS_DENIED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[01]
-    AceSid: BUILTIN_ADMINISTRATORS
+    AceSid: Administrators
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[02]
-    AceSid: CREATOR_OWNER
+    AceSid: Creator Owner
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT, INHERIT_ONLY
     Rights:
       FILE_ALL
   Ace[03]
-    AceSid: LOCAL_SYSTEM
+    AceSid: Local System
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[04]
-    AceSid: BUILTIN_USERS
+    AceSid: Users
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:

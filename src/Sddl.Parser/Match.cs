@@ -71,13 +71,13 @@ namespace Sddl.Parser
             return null;
         }
 
-        public static string OneByRegex(string input, IDictionary<string, string> tokensToLabels)
+        public static string OneByRegexOrPrefix(string input, IList<(string prefix, string regex, string value)> tokensToLabels)
         {
-            foreach (var kv in tokensToLabels)
+            foreach (var kkv in tokensToLabels)
             {
-                if (Regex.IsMatch(input, kv.Key))
+                if ((!string.IsNullOrEmpty(kkv.prefix) && input.StartsWith(kkv.prefix)) || Regex.IsMatch(input, kkv.regex))
                 {
-                    return kv.Value;
+                    return kkv.value;
                 }
             }
 

@@ -47,8 +47,8 @@ namespace Sddl.Parser.Tests
                 {
 "O:AOG:DAD:(A;;RPWPCCDCLCSWRCWDWOGA;;;S-1-0-0)",
 
-@"Owner: ACCOUNT_OPERATORS
-Group: DOMAIN_ADMINISTRATORS
+@"Owner: Account Operators
+Group: Domain Admins
 Dacl:
   Ace[00]
     AceSid: Nobody
@@ -73,12 +73,12 @@ Dacl:
 
 @"Dacl:
   Ace[00]
-    AceSid: LOCAL_SYSTEM
+    AceSid: Local System
     AceType: ACCESS_ALLOWED
     Rights:
       FILE_ALL
   Ace[01]
-    AceSid: BUILTIN_ADMINISTRATORS
+    AceSid: Administrators
     AceType: ACCESS_ALLOWED
     Rights:
       FILE_ALL
@@ -92,31 +92,31 @@ Dacl:
 @"Dacl:
   Flags: PROTECTED, AUTO_INHERITED
   Ace[00]
-    AceSid: BUILTIN_GUESTS
+    AceSid: Guests
     AceType: ACCESS_DENIED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[01]
-    AceSid: BUILTIN_ADMINISTRATORS
+    AceSid: Administrators
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[02]
-    AceSid: CREATOR_OWNER
+    AceSid: Creator Owner
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT, INHERIT_ONLY
     Rights:
       FILE_ALL
   Ace[03]
-    AceSid: LOCAL_SYSTEM
+    AceSid: Local System
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[04]
-    AceSid: BUILTIN_USERS
+    AceSid: Users
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
@@ -128,36 +128,36 @@ Dacl:
                 {
 "O:BAG:SYD:PAI(D;OICI;FA;;;BG)(A;OICI;FA;;;BA)(A;OICIIO;FA;;;CO)(A;OICI;FA;;;SY)(A;OICI;FA;;;BU)S:AI(AU;OICINPFA;RPDTSDWD;;;BU)(AU;OICINPSA;CCSWRPDTLOSD;;;BU)",
 
-@"Owner: BUILTIN_ADMINISTRATORS
-Group: LOCAL_SYSTEM
+@"Owner: Administrators
+Group: Local System
 Dacl:
   Flags: PROTECTED, AUTO_INHERITED
   Ace[00]
-    AceSid: BUILTIN_GUESTS
+    AceSid: Guests
     AceType: ACCESS_DENIED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[01]
-    AceSid: BUILTIN_ADMINISTRATORS
+    AceSid: Administrators
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[02]
-    AceSid: CREATOR_OWNER
+    AceSid: Creator Owner
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT, INHERIT_ONLY
     Rights:
       FILE_ALL
   Ace[03]
-    AceSid: LOCAL_SYSTEM
+    AceSid: Local System
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[04]
-    AceSid: BUILTIN_USERS
+    AceSid: Users
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
@@ -165,31 +165,31 @@ Dacl:
 Sacl:
   Flags: PROTECTED, AUTO_INHERITED
   Ace[00]
-    AceSid: BUILTIN_GUESTS
+    AceSid: Guests
     AceType: ACCESS_DENIED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[01]
-    AceSid: BUILTIN_ADMINISTRATORS
+    AceSid: Administrators
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[02]
-    AceSid: CREATOR_OWNER
+    AceSid: Creator Owner
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT, INHERIT_ONLY
     Rights:
       FILE_ALL
   Ace[03]
-    AceSid: LOCAL_SYSTEM
+    AceSid: Local System
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
       FILE_ALL
   Ace[04]
-    AceSid: BUILTIN_USERS
+    AceSid: Users
     AceType: ACCESS_ALLOWED
     AceFlags: OBJECT_INHERIT, CONTAINER_INHERIT
     Rights:
@@ -201,11 +201,11 @@ Sacl:
                 {
 "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
 
-@"Owner: DOMAIN_ADMINISTRATORS
-Group: DOMAIN_ADMINISTRATORS
+@"Owner: Domain Admins
+Group: Domain Admins
 Dacl:
   Ace[00]
-    AceSid: LOCAL_SYSTEM
+    AceSid: Local System
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -219,7 +219,7 @@ Dacl:
       STANDARD_DELETE
       SELF_WRITE
   Ace[01]
-    AceSid: DOMAIN_ADMINISTRATORS
+    AceSid: Domain Admins
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -233,35 +233,35 @@ Dacl:
       STANDARD_DELETE
       SELF_WRITE
   Ace[02]
-    AceSid: ACCOUNT_OPERATORS
+    AceSid: Account Operators
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967aba-0de6-11d0-a285-00aa003049e2
   Ace[03]
-    AceSid: ACCOUNT_OPERATORS
+    AceSid: Account Operators
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967a9c-0de6-11d0-a285-00aa003049e2
   Ace[04]
-    AceSid: ACCOUNT_OPERATORS
+    AceSid: Account Operators
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: 6da8a4ff-0e52-11d0-a286-00aa003049e2
   Ace[05]
-    AceSid: PRINTER_OPERATORS
+    AceSid: Print Operators
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967aa8-0de6-11d0-a285-00aa003049e2
   Ace[06]
-    AceSid: AUTHENTICATED_USERS
+    AceSid: Authenticated Users
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -269,7 +269,7 @@ Dacl:
       READ_CONTROL
 Sacl:
   Ace[00]
-    AceSid: LOCAL_SYSTEM
+    AceSid: Local System
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -283,7 +283,7 @@ Sacl:
       STANDARD_DELETE
       SELF_WRITE
   Ace[01]
-    AceSid: DOMAIN_ADMINISTRATORS
+    AceSid: Domain Admins
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
@@ -297,35 +297,35 @@ Sacl:
       STANDARD_DELETE
       SELF_WRITE
   Ace[02]
-    AceSid: ACCOUNT_OPERATORS
+    AceSid: Account Operators
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967aba-0de6-11d0-a285-00aa003049e2
   Ace[03]
-    AceSid: ACCOUNT_OPERATORS
+    AceSid: Account Operators
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967a9c-0de6-11d0-a285-00aa003049e2
   Ace[04]
-    AceSid: ACCOUNT_OPERATORS
+    AceSid: Account Operators
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: 6da8a4ff-0e52-11d0-a286-00aa003049e2
   Ace[05]
-    AceSid: PRINTER_OPERATORS
+    AceSid: Print Operators
     AceType: OBJECT_ACCESS_ALLOWED
     Rights:
       CREATE_CHILD
       DELETE_CHILD
     ObjectGuid: bf967aa8-0de6-11d0-a285-00aa003049e2
   Ace[06]
-    AceSid: AUTHENTICATED_USERS
+    AceSid: Authenticated Users
     AceType: ACCESS_ALLOWED
     Rights:
       READ_PROPERTY
