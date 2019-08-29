@@ -432,7 +432,7 @@ namespace Sddl.Parser
 
         public static bool operator!= (Ace ace0, Ace ace1)
         {
-            return !!(ace0 == ace1);
+            return !(ace0 == ace1);
         }
     }
 }
