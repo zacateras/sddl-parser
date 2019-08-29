@@ -407,5 +407,32 @@ namespace Sddl.Parser
 
             return sb.ToString();
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Ace ace &&
+                   Raw == ace.Raw &&
+                   AceType == ace.AceType &&
+                   EqualityComparer<string[]>.Default.Equals(AceFlags, ace.AceFlags) &&
+                   EqualityComparer<string[]>.Default.Equals(Rights, ace.Rights) &&
+                   ObjectGuid == ace.ObjectGuid &&
+                   InheritObjectGuid == ace.InheritObjectGuid &&
+                   AceSid == ace.AceSid;
+        }
+
+        public static bool operator== (Ace ace0, Ace ace1)
+        {
+            if (ace0 is null && ace1 is null)
+                return true;
+            else if (ace0 is null || ace1 is null)
+                return false;
+            else
+                return ace0.Equals(ace1);
+        }
+
+        public static bool operator!= (Ace ace0, Ace ace1)
+        {
+            return !(ace0 == ace1);
+        }
     }
 }
