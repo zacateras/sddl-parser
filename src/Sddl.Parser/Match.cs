@@ -45,7 +45,15 @@ namespace Sddl.Parser
         {
             foreach (var kv in tokensToLabels)
             {
-                if (input.StartsWith(kv.Key))
+                if (input.Length <= 2)
+                {
+                    if (input == kv.Key)
+                    {
+                        reminder = null;
+                        return kv.Value;
+                    }
+                }
+                else if (input.StartsWith(kv.Key))
                 {
                     reminder = SubstituteEmptyWithNull(input.Substring(kv.Key.Length));
                     return kv.Value;
