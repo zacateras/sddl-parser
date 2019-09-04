@@ -142,7 +142,6 @@ namespace Sddl.Parser
         public override bool Equals(object obj)
         {
             return obj is Sid sid &&
-                   Raw == sid.Raw &&
                    Alias == sid.Alias;
         }
 

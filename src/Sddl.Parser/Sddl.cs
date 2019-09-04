@@ -102,7 +102,6 @@ namespace Sddl.Parser
         public override bool Equals(object obj)
         {
             return obj is Sddl sddl &&
-                   Raw == sddl.Raw &&
                    Owner == sddl.Owner &&
                    Group == sddl.Group &&
                    Dacl == sddl.Dacl &&

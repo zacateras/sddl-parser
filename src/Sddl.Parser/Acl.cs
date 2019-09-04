@@ -102,9 +102,8 @@ namespace Sddl.Parser
         public override bool Equals(object obj)
         {
             return obj is Acl acl &&
-                   Raw == acl.Raw &&
-                   EqualityComparer<string[]>.Default.Equals(Flags, acl.Flags) &&
-                   EqualityComparer<Ace[]>.Default.Equals(Aces, acl.Aces);
+                   ((Flags is null && acl.Flags is null) || (!(Flags is null) && !(acl.Flags is null) && Flags.Except(acl.Flags).Count() == 0)) &&
+                   ((Aces is null && acl.Aces is null) || (!(Aces is null) && !(acl.Aces is null) && Aces.SequenceEqual(acl.Aces)));
         }
 
         public static bool operator== (Acl acl0, Acl acl1)
