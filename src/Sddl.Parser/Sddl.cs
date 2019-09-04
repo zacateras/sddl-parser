@@ -93,7 +93,7 @@ namespace Sddl.Parser
             if (Sacl != null)
             {
                 sb.AppendLineEnv($"{nameof(Sacl)}:");
-                sb.AppendIndentEnv(Dacl.ToString());
+                sb.AppendIndentEnv(Sacl.ToString());
             }
 
             return sb.ToString();
