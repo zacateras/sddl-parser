@@ -397,6 +397,12 @@ Sacl:
 
                 yield return new object[]
                 {
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;S-1-5-18)S:(AU;SAFA;WDWOSDWPCCDCSW;;;DU)",
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)S:(AU;SAFA;WDWOSDWPCCDCSW;;;S-1-5-21-1111111111-2222222222-3333333333-513)"
+                };
+
+                yield return new object[]
+                {
                     null,
                     null
                 };
