@@ -334,5 +334,153 @@ Sacl:
                 };
             }
         }
+
+        [MemberData(nameof(Two_Same_SddlObject_Should_Be_Equal_Data))]
+        [Theory]
+        public void Two_Same_Sddl_Object_Should_Be_Equal(string sddlString0, string sddlString1)
+        {
+            Sddl sddlObject0 = null;
+            Sddl sddlObject1 = null;
+
+            if (!string.IsNullOrEmpty(sddlString0))
+            {
+                sddlObject0 = new Sddl(sddlString0);
+            }
+
+            if (!string.IsNullOrEmpty(sddlString1))
+            {
+                sddlObject1 = new Sddl(sddlString1);
+            }
+
+            Assert.True(sddlObject0 == sddlObject1);
+        }
+
+        public static IEnumerable<object[]> Two_Same_SddlObject_Should_Be_Equal_Data
+        {
+            get
+            {
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCSDSWWOWD;;;SY)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "G:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "G:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "D:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "D:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAS:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAG:DAS:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;S-1-5-18)S:(AU;SAFA;WDWOSDWPCCDCSW;;;DU)",
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)S:(AU;SAFA;WDWOSDWPCCDCSW;;;S-1-5-21-1111111111-2222222222-3333333333-513)"
+                };
+
+                yield return new object[]
+                {
+                    null,
+                    null
+                };
+            }
+        }
+
+        [MemberData(nameof(Two_Different_SddlObject_Should_Not_Be_Equal_Data))]
+        [Theory]
+        public void Two_Different_Sddl_Object_Should_Not_Be_Equal(string sddlString0, string sddlString1)
+        {
+            Sddl sddlObject0 = null;
+            Sddl sddlObject1 = null;
+
+            if (!string.IsNullOrEmpty(sddlString0))
+            {
+                sddlObject0 = new Sddl(sddlString0);
+            }
+
+            if (!string.IsNullOrEmpty(sddlString1))
+            {
+                sddlObject1 = new Sddl(sddlString1);
+            }
+
+            Assert.True(sddlObject0 != sddlObject1);
+        }
+
+        public static IEnumerable<object[]> Two_Different_SddlObject_Should_Not_Be_Equal_Data
+        {
+            get
+            {
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    null
+                };
+
+                yield return new object[]
+                {
+                    null,
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aba-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;bf967a9c-0de6-11d0-a285-00aa003049e2;;AO)(OA;;CCDC;6da8a4ff-0e52-11d0-a286-00aa003049e2;;AO)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;DA)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "G:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)",
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAG:DAS:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+            }
+        }
     }
 }
