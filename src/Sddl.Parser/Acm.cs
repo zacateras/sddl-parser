@@ -6,7 +6,7 @@ namespace Sddl.Parser
     public abstract class Acm
     {
         public bool IsValid => Errors.Any() == false;
-        public List<Error> Errors = new List<Error>();
+        public List<Error> Errors { get; } = new List<Error>();
 
         protected void Report(Error error) => Errors.Add(error);
     }
