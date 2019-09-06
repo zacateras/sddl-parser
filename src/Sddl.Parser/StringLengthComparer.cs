@@ -2,7 +2,7 @@
 
 namespace Sddl.Parser
 {
-    public class StringLengthComparer : IComparer<string>
+    internal class StringLengthComparer : IComparer<string>
     {
         public int Compare(string x, string y)
         {
