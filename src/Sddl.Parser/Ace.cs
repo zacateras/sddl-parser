@@ -123,7 +123,7 @@ namespace Sddl.Parser
         /// <summary>
         /// A dictionary of ace type strings as defined in https://msdn.microsoft.com/en-us/library/windows/desktop/aa374928(v=vs.85).aspx#ace_types
         /// </summary>
-        internal static Dictionary<string, string> AceTypesDict = new Dictionary<string, string>
+        internal static SortedDictionary<string, string> AceTypesDict = new SortedDictionary<string, string>(new StringLengthComparer())
         {
             { "A", "ACCESS_ALLOWED" },
             { "D", "ACCESS_DENIED" },
