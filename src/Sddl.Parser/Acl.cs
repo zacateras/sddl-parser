@@ -98,5 +98,27 @@ namespace Sddl.Parser
 
             return sb.ToString();
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Acl acl &&
+                   ((Flags is null && acl.Flags is null) || (!(Flags is null) && !(acl.Flags is null) && Flags.Except(acl.Flags).Count() == 0)) &&
+                   ((Aces is null && acl.Aces is null) || (!(Aces is null) && !(acl.Aces is null) && Aces.SequenceEqual(acl.Aces)));
+        }
+
+        public static bool operator== (Acl acl0, Acl acl1)
+        {
+            if (acl0 is null && acl1 is null)
+                return true;
+            else if (acl0 is null || acl1 is null)
+                return false;
+            else
+                return acl0.Equals(acl1);
+        }
+
+        public static bool operator!= (Acl acl0, Acl acl1)
+        {
+            return !(acl0 == acl1);
+        }
     }
 }

@@ -34,7 +34,8 @@
 
         private static void Usage()
         {
-            Console.WriteLine("Usage: ./Sddl.Parser.Console.exe \"O:BAG:BAD:(A;CI;CCDCRP;;;NS)\" [File]");
+            string securableAlternative = string.Join(" | ", Enum.GetNames(typeof(SecurableObjectType)));
+            Console.WriteLine($"Usage: ./Sddl.Parser.Console.exe \"O:BAG:BAD:(A;CI;CCDCRP;;;NS)\" [{securableAlternative}]");
         }
     }
 }

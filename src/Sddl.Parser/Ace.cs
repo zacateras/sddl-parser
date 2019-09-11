@@ -123,7 +123,7 @@ namespace Sddl.Parser
         /// <summary>
         /// A dictionary of ace type strings as defined in https://msdn.microsoft.com/en-us/library/windows/desktop/aa374928(v=vs.85).aspx#ace_types
         /// </summary>
-        internal static Dictionary<string, string> AceTypesDict = new Dictionary<string, string>
+        internal static SortedDictionary<string, string> AceTypesDict = new SortedDictionary<string, string>(new StringLengthComparer())
         {
             { "A", "ACCESS_ALLOWED" },
             { "D", "ACCESS_DENIED" },
@@ -406,6 +406,32 @@ namespace Sddl.Parser
                 sb.AppendLineEnv($"{nameof(InheritObjectGuid)}: {InheritObjectGuid.ToString()}");
 
             return sb.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Ace ace &&
+                   AceType == ace.AceType &&
+                   ((AceFlags is null && ace.AceFlags is null) || (!(AceFlags is null) && !(ace.AceFlags is null) && AceFlags.Except(ace.AceFlags).Count() == 0)) &&
+                   ((Rights is null && ace.Rights is null) || (!(Rights is null) && !(ace.Rights is null) && Rights.Except(ace.Rights).Count() == 0)) &&
+                   ObjectGuid == ace.ObjectGuid &&
+                   InheritObjectGuid == ace.InheritObjectGuid &&
+                   AceSid == ace.AceSid;
+        }
+
+        public static bool operator== (Ace ace0, Ace ace1)
+        {
+            if (ace0 is null && ace1 is null)
+                return true;
+            else if (ace0 is null || ace1 is null)
+                return false;
+            else
+                return ace0.Equals(ace1);
+        }
+
+        public static bool operator!= (Ace ace0, Ace ace1)
+        {
+            return !(ace0 == ace1);
         }
     }
 }
