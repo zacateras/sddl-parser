@@ -419,6 +419,30 @@ Sacl:
                     "O:DAG:DAD:(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
                     "O:DAG:DAD:(A;;RPWPCCDCLCRCWOWDSDSW;;;SY)(OA;;CCDC;bf967aa8-0de6-11d0-a285-00aa003049e2;;PO)(A;;RPLCRC;;;AU)S:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
                 };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAG:DAS:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)",
+                    "O:DAG:DAD:(AU;SAFA;WDWOSDWPCCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(AU;SAFA;WDWOSDWPCCSW;;;WD)",
+                    "O:DAG:DAD:(AU;SAFA;WDWOSDWPCCDCSW;;;WD)"
+                };
+
+                yield return new object[]
+                {
+                    "O:DAG:DAD:(AU;SAFA;WDWOSDWPDCSW;;;WD)",
+                    "O:DAG:DAD:(AU;SAFA;WDWOSDWPCCSW;;;WD)"
+                };
             }
         }
     }
