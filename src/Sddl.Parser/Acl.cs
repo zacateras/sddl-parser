@@ -11,7 +11,11 @@ namespace Sddl.Parser
         public string[] Flags { get; }
         public Ace[] Aces { get; }
 
-        public Acl(string acl, SecurableObjectType type = SecurableObjectType.Unknown)
+        public Acl(string acl, SecurableObjectType type = SecurableObjectType.Unknown) : this(acl, type, null)
+        {
+        }
+
+        public Acl(string acl, SecurableObjectType type, SidResolverOptions sidResolverOptions)
         {
             Raw = acl;
 
@@ -55,7 +59,7 @@ namespace Sddl.Parser
                         }
 
                         if (balance == 0)
-                            aces.AddLast(new Ace(acl.Substring(begin + 1, length), type));
+                            aces.AddLast(new Ace(acl.Substring(begin + 1, length), type, sidResolverOptions));
                     }
                     else if (balance <= 0)
                     {
