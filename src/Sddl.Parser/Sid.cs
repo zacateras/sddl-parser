@@ -8,7 +8,11 @@ namespace Sddl.Parser
 
         public string Alias { get; }
         
-        public Sid(string sid)
+        public Sid(string sid) : this(sid, null)
+        {
+        }
+
+        public Sid(string sid, SidResolverOptions options)
         {
             Raw = sid;
 
@@ -16,9 +20,18 @@ namespace Sddl.Parser
 
             if (alias == null)
             {
-                Report(Error.SDP001.Format(sid));
-                
-                alias = Format.Unknown(sid);
+                // Try DirectoryService lookup if enabled
+                if (options?.EnableDirectoryServiceLookup == true)
+                {
+                    var resolver = options.SidResolver ?? new DirectoryServiceSidResolver();
+                    alias = resolver.ResolveSid(sid);
+                }
+
+                if (alias == null)
+                {
+                    Report(Error.SDP001.Format(sid));
+                    alias = Format.Unknown(sid);
+                }
             }
             
             Alias = alias;

@@ -13,7 +13,11 @@ namespace Sddl.Parser
         public Acl Dacl { get; }
         public Acl Sacl { get; }
 
-        public Sddl(string sddl, SecurableObjectType type = SecurableObjectType.Unknown)
+        public Sddl(string sddl, SecurableObjectType type = SecurableObjectType.Unknown) : this(sddl, type, null)
+        {
+        }
+
+        public Sddl(string sddl, SecurableObjectType type, SidResolverOptions sidResolverOptions)
         {
             Raw = sddl;
 
@@ -40,25 +44,25 @@ namespace Sddl.Parser
 
             if (components.TryGetValue(OwnerToken, out var owner))
             {
-                Owner = new Sid(owner);
+                Owner = new Sid(owner, sidResolverOptions);
                 components.Remove(OwnerToken);
             }
 
             if (components.TryGetValue(GroupToken, out var group))
             {
-                Group = new Sid(group);
+                Group = new Sid(group, sidResolverOptions);
                 components.Remove(GroupToken);
             }
 
             if (components.TryGetValue(DaclToken, out var dacl))
             {
-                Dacl = new Acl(dacl, type);
+                Dacl = new Acl(dacl, type, sidResolverOptions);
                 components.Remove(DaclToken);
             }
 
             if (components.TryGetValue(SaclToken, out var sacl))
             {
-                Sacl = new Acl(sacl, type);
+                Sacl = new Acl(sacl, type, sidResolverOptions);
                 components.Remove(SaclToken);
             }
 

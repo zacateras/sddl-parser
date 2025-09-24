@@ -16,7 +16,11 @@ namespace Sddl.Parser
         public string InheritObjectGuid { get; }
         public Sid AceSid { get; }
 
-        public Ace(string ace, SecurableObjectType type = SecurableObjectType.Unknown)
+        public Ace(string ace, SecurableObjectType type = SecurableObjectType.Unknown) : this(ace, type, null)
+        {
+        }
+
+        public Ace(string ace, SecurableObjectType type, SidResolverOptions sidResolverOptions)
         {
             Raw = ace;
 
@@ -90,7 +94,7 @@ namespace Sddl.Parser
             // account_sid
             if (parts.Length > 5 && parts[5].Length > 0)
             {
-                AceSid = new Sid(parts[5]);
+                AceSid = new Sid(parts[5], sidResolverOptions);
             }
 
             // resource_attribute
